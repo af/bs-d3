@@ -3,17 +3,25 @@
  * https://github.com/d3/d3-array/blob/master/README.md
  */
 
-type arr = array float;
+type fs = array float;
 
-/* type for the extra (optional) accessor parameter for every d3-array function */
-type accessorT = float => float;
+/* Statistics */
+/* Note: some of these only take floats for now, where only numeric types appear to make sense */
+external min_ : array 'a => accessor::('b => 'a)? => unit => 'a = "min" [@@bs.module "d3-array"];
+external max_ : array 'a => accessor::('b => 'a)? => unit => 'a = "max" [@@bs.module "d3-array"];
+external extent : array 'a => accessor::('b => 'a)? => unit => ('a, 'a) = "" [@@bs.module "d3-array"];
+external sum : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
+external mean : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
+external median : array 'a => accessor::('b => 'a)? => unit => 'a = "" [@@bs.module "d3-array"];
+external quantile : fs => float => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
+external variance : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
+external deviation : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
 
-external min_ : arr => accessor::accessorT? => unit => float = "min" [@@bs.module "d3-array"];
-external max_ : arr => accessor::accessorT? => unit => float = "max" [@@bs.module "d3-array"];
-external extent : arr => accessor::accessorT? => unit => (float, float) = "" [@@bs.module "d3-array"];
-external sum : arr => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
-external mean : arr => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
-external median : arr => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
-external quantile : arr => float => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
-external variance : arr => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
-external deviation : arr => accessor::accessorT? => unit => float = "" [@@bs.module "d3-array"];
+/* Search */
+external scan : array 'a => comp::('a => 'a => 'b)? => unit => int = "" [@@bs.module "d3-array"];
+external bisectLeft : array 'a => 'a => lo::int? => hi::int? => unit => int = "" [@@bs.module "d3-array"];
+external bisect : array 'a => 'a => lo::int? => hi::int? => unit => int = "" [@@bs.module "d3-array"];
+external bisectRight : array 'a => 'a => lo::int? => hi::int? => unit => int = "" [@@bs.module "d3-array"];
+/* TODO: bisector, see https://github.com/d3/d3-array/blob/master/README.md#bisector */
+external ascending : 'a => 'a => int = "" [@@bs.module "d3-array"]; /* TODO: this can also return NaN */
+external descending : 'a => 'a => int = "" [@@bs.module "d3-array"]; /* TODO: this can also return NaN */
