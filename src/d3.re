@@ -1,9 +1,14 @@
 /*
+ * Expose the APIs of all of d3's sub-modules.
+ *
+ * For a top-level view of the full API, see:
  * https://github.com/d3/d3/blob/master/API.md
  */
 
 open D3Array;
+open D3Axis;
 
+/* TODO: extract these logged "tests" into real tests: */
 /*Js.log2 "min int:" (min_ [|1, 5|] ());*/
 /*Js.log (min_ [|4., 5.|] ());*/
 /*Js.log (min_ [|4., 5.|] accessor::(fun x => x *. x) ());*/
