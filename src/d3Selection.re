@@ -3,17 +3,17 @@
  * https://github.com/d3/d3-selection#api-reference
  */
 
-type t;
+type selectionT;
 
-external selectRoot : unit => t = "selection" [@@bs.module "d3-selection"];
-external select : string => t = "" [@@bs.module "d3-selection"];
-external selectNode : Dom.node => t = "" [@@bs.module "d3-selection"];
-external selectAll : string => t = "" [@@bs.module "d3-selection"];
+external selectRoot : unit => selectionT = "selection" [@@bs.module "d3-selection"];
+external select : string => selectionT = "" [@@bs.module "d3-selection"];
+external selectNode : Dom.node => selectionT = "" [@@bs.module "d3-selection"];
+external selectAll : string => selectionT = "" [@@bs.module "d3-selection"];
 
-external subSelect : string = "" [@@bs.send.pipe: t];
-external subSelectAll : string = "" [@@bs.send.pipe: t];
-external append : string = "" [@@bs.send.pipe: t];
-external attr : string => 'a = "" [@@bs.send.pipe: t];
-external data : array 'a = "" [@@bs.send.pipe: t];
+external subSelect : string => selectionT = "" [@@bs.send.pipe: selectionT];
+external subSelectAll : string => selectionT = "" [@@bs.send.pipe: selectionT];
+external append : string => selectionT = "" [@@bs.send.pipe: selectionT];
+external attr : string => 'a => selectionT = "" [@@bs.send.pipe: selectionT];
+external data : array 'a => selectionT = "" [@@bs.send.pipe: selectionT];
 
-external callAxis : D3Axis.t = "" [@@bs.send.pipe: t];
+external callAxis : D3Axis.axisT => selectionT = "call" [@@bs.send.pipe: selectionT];

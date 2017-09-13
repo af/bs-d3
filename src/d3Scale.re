@@ -3,13 +3,13 @@
  * https://github.com/d3/d3-scale#api-reference
  */
 
-type t;
+type scaleT;
 
-external scaleLinear : unit => t = "" [@@bs.module "d3-scale"];
-external scaleLog : unit => t = "" [@@bs.module "d3-scale"];
-external scalePow : unit => t = "" [@@bs.module "d3-scale"];
-external scaleSqrt : unit => t = "" [@@bs.module "d3-scale"];
-external scaleTime : unit => t = "" [@@bs.module "d3-scale"];
+external scaleLinear : unit => scaleT = "" [@@bs.module "d3-scale"];
+external scaleLog : unit => scaleT = "" [@@bs.module "d3-scale"];
+external scalePow : unit => scaleT = "" [@@bs.module "d3-scale"];
+external scaleSqrt : unit => scaleT = "" [@@bs.module "d3-scale"];
+external scaleTime : unit => scaleT = "" [@@bs.module "d3-scale"];
 
 /* TODO: how to handle invocation of range functions?
  * eg. `var r = scaleLinear().domain([0,10]).range([0, 100]);
@@ -18,9 +18,9 @@ external scaleTime : unit => t = "" [@@bs.module "d3-scale"];
 
 /* Bindings for methods on range objects */
 /* TODO: implement missing methods */
-external domain : array float = "" [@@bs.send.pipe: t];
-external range : array 'a = "" [@@bs.send.pipe: t];
-external rangeRound : array 'a = "" [@@bs.send.pipe: t];
-external clamp : bool = "" [@@bs.send.pipe: t];
+external domain : array float => scaleT = "" [@@bs.send.pipe: scaleT];
+external range : array 'a => scaleT = "" [@@bs.send.pipe: scaleT];
+external rangeRound : array 'a => scaleT = "" [@@bs.send.pipe: scaleT];
+external clamp : bool => scaleT = "" [@@bs.send.pipe: scaleT];
 
-external ticks : int => array 'a = "" [@@bs.send.pipe: t];
+external ticks : int => array 'a = "" [@@bs.send.pipe: scaleT];

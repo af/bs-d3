@@ -9,7 +9,8 @@ type fs = array float;
 /* Note: some of these only take floats for now, where only numeric types appear to make sense */
 external min_ : array 'a => accessor::('b => 'a)? => unit => 'a = "min" [@@bs.module "d3-array"];
 external max_ : array 'a => accessor::('b => 'a)? => unit => 'a = "max" [@@bs.module "d3-array"];
-external extent : array 'a => accessor::('b => 'a)? => unit => ('a, 'a) = "" [@@bs.module "d3-array"];
+external extent : array 'a => accessor::('b => 'a)? => unit => fs = "" [@@bs.module "d3-array"];
+external extentTuple : array 'a => accessor::('b => 'a)? => unit => ('a, 'a) = "extent" [@@bs.module "d3-array"];
 external sum : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
 external mean : fs => accessor::('a => float)? => unit => float = "" [@@bs.module "d3-array"];
 external median : array 'a => accessor::('b => 'a)? => unit => 'a = "" [@@bs.module "d3-array"];

@@ -5,11 +5,11 @@
  * https://github.com/d3/d3/blob/master/API.md
  */
 
-open D3Array;
-open D3Axis;
-open D3Scale;
-open D3Selection;
-open D3Shape;
+include D3Array;
+include D3Axis;
+include D3Scale;
+include D3Selection;
+include D3Shape;
 
 /* TODO: extract these logged "tests" into real tests: */
 /*Js.log2 "min int:" (min_ [|1, 5|] ());*/
