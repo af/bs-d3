@@ -6,7 +6,7 @@
 type t;
 
 /* TODO: these are stubs for now, need to implement d3-scale first */
-external axisTop : 'a => t = "" [@@bs.module "d3-axis"];
-external axisBottom : 'a => t = "" [@@bs.module "d3-axis"];
-external axisLeft : 'a => t = "" [@@bs.module "d3-axis"];
-external axisRight : 'a => t = "" [@@bs.module "d3-axis"];
+external axisTop : D3Scale.t => t = "" [@@bs.module "d3-axis"];
+external axisBottom : D3Scale.t => t = "" [@@bs.module "d3-axis"];
+external axisLeft : D3Scale.t => t = "" [@@bs.module "d3-axis"];
+external axisRight : D3Scale.t => t = "" [@@bs.module "d3-axis"];

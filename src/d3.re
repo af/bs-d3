@@ -7,6 +7,9 @@
 
 open D3Array;
 open D3Axis;
+open D3Scale;
+open D3Selection;
+open D3Shape;
 
 /* TODO: extract these logged "tests" into real tests: */
 /*Js.log2 "min int:" (min_ [|1, 5|] ());*/
