@@ -6,16 +6,15 @@ let width = 900;
 let height = 500;
 
 let x = D3.scaleLinear ()
-    |> D3.domain (D3.extent sampleData ())
+    |> D3.domain [|0., float_of_int ((Array.length sampleData) - 1) |]
     |> D3.range [|0, width|];
 let y = D3.scaleLinear ()
     |> D3.domain [|0., float_of_int (D3.max_ sampleData ())|]
     |> D3.range([|height, 0|]);
 
-/* FIXME: invoke x() and y() in lineX() and lineY(), respectively */
 let valueLine = D3.line ()
-    |> D3.lineX (fun _ idx _ => float_of_int idx)
-    |> D3.lineY (fun value _ _ => value);
+    |> D3.lineX (fun _ idx _ => (x (float_of_int idx)))
+    |> D3.lineY (fun value _ _ => y value);
 
 let svg = D3.select "body"
     |> D3.append "svg"
@@ -27,6 +26,8 @@ let svg = D3.select "body"
 svg
     |> D3.append "path"
     |> D3.data [|sampleData|]
+    |> D3.attr "fill" "none"
+    |> D3.attr "stroke" "#337"
     |> D3.attr "class" "line"
     |> D3.attr "d" valueLine;
 
