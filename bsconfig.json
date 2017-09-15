@@ -3,8 +3,10 @@
 {
   "name": "bs-d3",
   "version": "0.1.0",
+  "package-specs": ["commonjs", "es6"],
   "sources": [
-    "src"
+    "src",
+    "examples"
   ],
   "bs-dependencies" : [
       // add your dependencies here. You'd usually install them normally through `npm install my-dependency`. If my-dependency has a bsconfig.json too, then everything will work seamlessly.
