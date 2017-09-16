@@ -17,7 +17,7 @@ let y = Scale.makeLinear ()
 
 let valueLine = D3.Line.make ()
     |> D3.Line.x (fun _ idx _ => (x (float_of_int idx)))
-    |> D3.Line.curve D3.Line.curveBundle
+    |> D3.Line.curve D3.Curve.bundle
     |> D3.Line.y (fun value _ _ => y value);
 
 let svg = S.select "body"
