@@ -15,10 +15,16 @@ let y = Scale.makeLinear ()
     |> Scale.domain [|0., float_of_int (D3.Arr.max_ sampleData ())|]
     |> Scale.range([|height, 0|]);
 
+let curve = D3.Curve.catmullRom;
 let valueLine = D3.Line.make ()
     |> D3.Line.x (fun _ idx _ => (x (float_of_int idx)))
-    |> D3.Line.curve D3.Curve.bundle
+    |> D3.Line.curve curve
     |> D3.Line.y (fun value _ _ => y value);
+let area = D3.Area.make ()
+    |> D3.Area.x (fun _ idx _ => (x (float_of_int idx)))
+    |> D3.Area.curve curve
+    |> D3.Area.y1 (fun value _ _ => y value)
+    |> D3.Area.y0 (fun _ _ _ => (float_of_int (height - margin)));
 
 let svg = S.select "body"
     |> S.append "svg"
@@ -31,9 +37,16 @@ svg
     |> S.append "path"
     |> S.data [|sampleData|]
     |> S.attr "fill" "none"
+    |> S.attr "stroke-width" "3"
     |> S.attr "stroke" "#337"
     |> S.attr "class" "line"
     |> S.attr "d" valueLine;
+svg
+    |> S.append "path"
+    |> S.data [|sampleData|]
+    |> S.attr "fill" "#ddf"
+    |> S.attr "stroke" "none"
+    |> S.attr "d" area;
 
 svg
     |> S.append "g"
