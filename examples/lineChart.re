@@ -33,17 +33,20 @@ let svg = S.select "body"
     |> S.append "g"
     |> S.attr "transform" ("translate(" ^ (string_of_int margin) ^ "," ^ (string_of_int margin) ^ ")");
 
+/* Draw a line with the data */
 svg
     |> S.append "path"
-    |> S.data [|sampleData|]
+    |> S.datum sampleData
     |> S.attr "fill" "none"
     |> S.attr "stroke-width" "3"
     |> S.attr "stroke" "#337"
     |> S.attr "class" "line"
     |> S.attr "d" valueLine;
+
+/* Draw an area fill with the data */
 svg
     |> S.append "path"
-    |> S.data [|sampleData|]
+    |> S.datum sampleData
     |> S.attr "fill" "#ddf"
     |> S.attr "stroke" "none"
     |> S.attr "d" area;
