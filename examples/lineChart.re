@@ -1,19 +1,22 @@
 /* ported (and simplified) Reason version of a basic d3 line chart
  * via https://bl.ocks.org/d3noob/402dd382a51a4f6eea487f9a35566de0 */
 module S = D3.Selection;
-module Scale = D3.Scale;
 
-let sampleData = [|1, 5, 6, 9, 10, 1, 3|];
+let sampleData = [|1, 5, 6, 9, 10, 1, 3, 7, 6, 4, 5|];
 let margin = 20;
 let width = 900;
 let height = 500;
 
-let x = Scale.makeLinear ()
-    |> Scale.domain [|0., float_of_int ((Array.length sampleData) - 1) |]
-    |> Scale.range [|0, width|];
-let y = Scale.makeLinear ()
-    |> Scale.domain [|0., float_of_int (D3.Arr.max_ sampleData ())|]
-    |> Scale.range([|height, 0|]);
+let x = D3.Scale.(
+    makeLinear ()
+    |> domain [|0., float_of_int ((Array.length sampleData) - 1) |]
+    |> range [|0, width|]
+);
+let y = D3.Scale.(
+    makeLinear ()
+    |> domain [|0., float_of_int (D3.Arr.max_ sampleData ())|]
+    |> range([|height, 0|])
+);
 
 let curve = D3.Curve.catmullRom;
 let valueLine = D3.Line.make ()
@@ -50,6 +53,17 @@ svg
     |> S.attr "fill" "#ddf"
     |> S.attr "stroke" "none"
     |> S.attr "d" area;
+
+/* Draw circles for each data point */
+svg
+    |> S.subSelectAll "circle"
+    |> S.data sampleData
+    |> S.enter
+    |> S.append "circle"
+        |> S.attr "fill" "337"
+        |> S.attr "cx" (fun _ idx _ => x idx)
+        |> S.attr "cy" (fun value _ _ => y value)
+        |> S.attr "r" 3;
 
 svg
     |> S.append "g"
