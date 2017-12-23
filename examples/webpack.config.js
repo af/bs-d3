@@ -12,6 +12,7 @@ const entry = exampleSources.reduce((acc, src) => {
     const fullPath = path.join(sourceDir, src)
     return {...acc, [entryName]: fullPath}
 }, {})
+console.log(entry)
 
 module.exports = {
     entry,
