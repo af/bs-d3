@@ -3,28 +3,23 @@
 module S = D3.Selection;
 
 let sampleData = [|1, 5, 6, 9, 10, 1, 3, 7, 6, 4, 5|];
-
 let margin = 20;
-
 let width = 900;
-
 let height = 500;
-
-let x =
-  D3.Scale.(
-    makeLinear()
-    |> domain([|0., float_of_int(Array.length(sampleData) - 1)|])
-    |> range([|0, width|])
-  );
-
-let y =
-  D3.Scale.(
-    makeLinear()
-    |> domain([|0., float_of_int(D3.Arr.max_(sampleData, ()))|])
-    |> range([|height, 0|])
-  );
-
 let curve = D3.Curve.catmullRom;
+
+
+let x = D3.Scale.(
+  makeLinear()
+  |> domain([|0., float_of_int(Array.length(sampleData) - 1)|])
+  |> range([|0, width|])
+);
+
+let y = D3.Scale.(
+  makeLinear()
+  |> domain([|0., float_of_int(D3.Arr.max_(sampleData, ()))|])
+  |> range([|height, 0|])
+);
 
 let valueLine =
   D3.Line.make()
