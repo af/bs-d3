@@ -9,9 +9,14 @@
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w"
   },
+  "homepage": "https://github.com/af/bs-d3",
+  "repository": "https://github.com/af/bs-d3",
+  "bugs": "https://github.com/af/bs-d3/issues",
   "keywords": [
-    "BuckleScript",
+    "bucklescript",
     "d3",
+    "d3js",
+    "dataviz",
     "reason",
     "reasonml"
   ],
