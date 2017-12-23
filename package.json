@@ -1,5 +1,6 @@
 {
   "name": "bs-d3",
+  "description": "Experimental d3 4.x bindings for BuckleScript",
   "version": "0.1.0",
   "scripts": {
     "bundle-examples": "webpack --context examples --config examples/webpack.config.js",
@@ -9,11 +10,14 @@
     "watch": "bsb -make-world -w"
   },
   "keywords": [
-    "BuckleScript"
+    "BuckleScript",
+    "d3",
+    "reason",
+    "reasonml"
   ],
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "1.8.2",
+    "bs-platform": "2.1.0",
     "webpack": "3.5.6",
     "webpack-bundle-analyzer": "2.9.0"
   },
