@@ -25,5 +25,5 @@ type t = float => float;
 [@bs.send.pipe : t] external domain : array(float) => t = "";
 [@bs.send.pipe : t] external range : array('a) => t = "";
 [@bs.send.pipe : t] external rangeRound : array('a) => t = "";
-[@bs.send.pipe : t] external clamp : bool => t = "";
+[@bs.send.pipe : t] external clamp : Js.boolean => t = "";
 [@bs.send.pipe : t] external ticks : int => array('a) = "";
