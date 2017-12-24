@@ -7,7 +7,7 @@
     "bundle-analyze": "ANALYZE_BUNDLE=1 npm run bundle-examples",
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
-    "watch": "bsb -make-world -w"
+    "start": "bsb -make-world -w"
   },
   "homepage": "https://github.com/af/bs-d3",
   "repository": "https://github.com/af/bs-d3",

@@ -26,3 +26,4 @@ lib/bs
 node_modules
 examples/dist
 lib
+.bsb.lock
