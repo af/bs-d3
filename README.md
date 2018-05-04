@@ -1,6 +1,6 @@
 # bs-d3
 
-WIP [d3](https://github.com/d3/d3) 4.x bindings for [Bucklescript](https://github.com/bucklescript/bucklescript/).
+WIP [d3](https://github.com/d3/d3) 5.x bindings for [Bucklescript](https://github.com/bucklescript/bucklescript/).
 
 Extremely incomplete and experimental; contributions welcome!
 

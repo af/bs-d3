@@ -16,7 +16,7 @@ type t;
 [@bs.send.pipe : t] external insert : string => t = "";
 [@bs.send.pipe : t] external remove : t = "";
 [@bs.send.pipe : t] external attr : (string, 'a) => t = "";
-[@bs.send.pipe : t] external classed : (string, Js.boolean) => t = "";
+[@bs.send.pipe : t] external classed : (string, bool) => t = "";
 [@bs.send.pipe : t] external classedFn : (string, ('a, int) => bool) => t = "classed";
 
 [@bs.send.pipe : t] external style : (string, string) => t = "";
