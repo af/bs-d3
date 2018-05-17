@@ -16,7 +16,7 @@ type accessor('a) = ('a, int, array('a)) => float;
 [@bs.send.pipe : t] external y1 : accessor('a) => t = "";
 
 [@bs.send.pipe : t] external defined : (('a, int, array('a)) => bool) => t = "";
-[@bs.send.pipe : t] external curve : Curve.t => t = "";
+[@bs.send.pipe : t] external curve : D3_Curve.t => t = "";
 [@bs.send.pipe : t] external context : 'a => t = "";
 [@bs.send.pipe : t] external getContext : unit => 'a = "context";
 [@bs.send.pipe : t] external lineX0 : unit => 'a = "";

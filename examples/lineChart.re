@@ -17,7 +17,7 @@ let x = D3.Scale.(
 
 let y = D3.Scale.(
   makeLinear()
-  |> domain([|0., float_of_int(D3.Arr.max_(sampleData, ()))|])
+  |> domain([|0., float_of_int(D3.Array.max_(sampleData, ()))|])
   |> range([|height, 0|])
 );
 
@@ -35,7 +35,7 @@ let area =
   |> D3.Area.y0((_, _, _) => float_of_int(height - margin));
 
 let svg =
-  S.select("body")
+  D3.select("body")
   |> S.append("svg")
   |> S.attr("width", width + 2 * margin)
   |> S.attr("height", height + 2 * margin)
@@ -65,7 +65,7 @@ svg
 
 /* Draw circles for each data point */
 svg
-|> S.subSelectAll("circle")
+|> S.selectAll("circle")
 |> S.data(sampleData)
 |> S.enter
 |> S.append("circle")
