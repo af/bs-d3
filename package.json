@@ -7,7 +7,9 @@
     "bundle-analyze": "ANALYZE_BUNDLE=1 npm run bundle-examples",
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
-    "start": "bsb -make-world -w"
+    "start": "bsb -make-world -w",
+    "pretest": "bsb -make-world",
+    "test": "jest --watchAll"
   },
   "homepage": "https://github.com/af/bs-d3",
   "repository": "https://github.com/af/bs-d3",
@@ -22,12 +24,18 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.2",
     "bs-platform": "3.0.0",
+    "jest": "^22.4.3",
+    "jsdom": "^11.10.0",
     "webpack": "4.5.0",
     "webpack-bundle-analyzer": "2.11.1",
     "webpack-cli": "2.0.14"
   },
   "dependencies": {
     "d3": "5.1.0"
+  },
+  "jest": {
+    "testRegex": "/js/__tests__/.*_test\\.js$"
   }
 }
