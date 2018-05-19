@@ -48,9 +48,3 @@ Currently some of the typings are still quite loose/permissive, if you have any 
 - [ ] Transitions
 - [ ] Voronoi
 - [ ] Zooming
-
-## Known Issues
-
-When building this project for the first time, you'll get some "value x can't be found" errors in
-the example files. Just re-build a couple of times and they'll be resolved automatically. If anyone
-knows why this happens, please file an issue or PR!
