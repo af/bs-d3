@@ -8,18 +8,18 @@ type accessor('a) = ('a, int, array('a)) => float;
 
 [@bs.module "d3-shape"] external make : unit => t = "area";
 
-[@bs.send.pipe : t] external x : accessor('a) => t = "";
-[@bs.send.pipe : t] external x0 : accessor('a) => t = "";
-[@bs.send.pipe : t] external x1 : accessor('a) => t = "";
-[@bs.send.pipe : t] external y : accessor('a) => t = "";
-[@bs.send.pipe : t] external y0 : accessor('a) => t = "";
-[@bs.send.pipe : t] external y1 : accessor('a) => t = "";
+[@bs.send] external x : t => accessor('a) => t = "";
+[@bs.send] external x0 : t => accessor('a) => t = "";
+[@bs.send] external x1 : t => accessor('a) => t = "";
+[@bs.send] external y : t => accessor('a) => t = "";
+[@bs.send] external y0 : t => accessor('a) => t = "";
+[@bs.send] external y1 : t => accessor('a) => t = "";
 
-[@bs.send.pipe : t] external defined : (('a, int, array('a)) => bool) => t = "";
-[@bs.send.pipe : t] external curve : D3_Curve.t => t = "";
-[@bs.send.pipe : t] external context : 'a => t = "";
-[@bs.send.pipe : t] external getContext : unit => 'a = "context";
-[@bs.send.pipe : t] external lineX0 : unit => 'a = "";
-[@bs.send.pipe : t] external lineX1 : unit => 'a = "";
-[@bs.send.pipe : t] external lineY0 : unit => 'a = "";
-[@bs.send.pipe : t] external lineY1 : unit => 'a = "";
+[@bs.send] external defined : t => (('a, int, array('a)) => bool) => t = "";
+[@bs.send] external curve : t => D3_Curve.t => t = "";
+[@bs.send] external context : t => 'a => t = "";
+[@bs.send] external getContext : t => unit => 'a = "context";
+[@bs.send] external lineX0 : t => unit => 'a = "";
+[@bs.send] external lineX1 : t => unit => 'a = "";
+[@bs.send] external lineY0 : t => unit => 'a = "";
+[@bs.send] external lineY1 : t => unit => 'a = "";

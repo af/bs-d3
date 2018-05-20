@@ -22,9 +22,9 @@ type t = float => float;
 
 /* Bindings for methods on range objects */
 /* TODO: implement missing methods */
-[@bs.send.pipe : t] external domain : array(float) => t = "";
-[@bs.send.pipe : t] external range : array('a) => t = "";
-[@bs.send.pipe : t] external rangeRound : array('a) => t = "";
-[@bs.send.pipe : t] external clamp : bool => t = "";
-[@bs.send.pipe : t] external ticks : int => array('a) = "";
+[@bs.send] external domain : t => array(float) => t = "";
+[@bs.send] external range : t => array('a) => t = "";
+[@bs.send] external rangeRound : t => array('a) => t = "";
+[@bs.send] external clamp : t => bool => t = "";
+[@bs.send] external ticks : t => int => array('a) = "";
 

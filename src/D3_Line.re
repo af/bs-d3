@@ -6,9 +6,9 @@ type t;
 
 [@bs.module "d3-shape"] external make : unit => t = "line";
 
-[@bs.send.pipe : t] external x : (('a, int, array('a)) => float) => t = "";
-[@bs.send.pipe : t] external y : (('a, int, array('a)) => float) => t = "";
-[@bs.send.pipe : t] external defined : (('a, int, array('a)) => bool) => t = "";
-[@bs.send.pipe : t] external curve : D3_Curve.t => t = "";
-[@bs.send.pipe : t] external context : 'a => t = "";
-[@bs.send.pipe : t] external getContext : unit => 'a = "context";
+[@bs.send] external x : t => (('a, int, array('a)) => float) => t = "";
+[@bs.send] external y : t => (('a, int, array('a)) => float) => t = "";
+[@bs.send] external defined : t => (('a, int, array('a)) => bool) => t = "";
+[@bs.send] external curve : t => D3_Curve.t => t = "";
+[@bs.send] external context : t => 'a => t = "";
+[@bs.send] external getContext : t => unit => 'a = "context";
