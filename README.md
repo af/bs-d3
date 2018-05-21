@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/af/bs-d3.svg?branch=master)](https://travis-ci.org/af/bs-d3)
+
 # bs-d3
 
 WIP [d3](https://github.com/d3/d3) 5.x bindings for [Bucklescript](https://github.com/bucklescript/bucklescript/).
