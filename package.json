@@ -9,7 +9,8 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "pretest": "bsb -make-world",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "test-ci": "npm run pretest && jest"
   },
   "homepage": "https://github.com/af/bs-d3",
   "repository": "https://github.com/af/bs-d3",
