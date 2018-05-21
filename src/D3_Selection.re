@@ -12,7 +12,9 @@ type t;
 [@bs.send] external style : t => (string, string) => t = "";
 [@bs.send] external styleFn : t => (string, ('a, int) => string) => t = "style";
 [@bs.send] external textFn : t => (('a, int) => string) => t = "text";
-[@bs.send] external filter : t => string => t = ""; /* TODO: filter by fn */
+[@bs.send] external filter : t => string => t = "";
+[@bs.send] external filterFn : (t, [@bs.this] ('a => bool)) => t = "filter";
+[@bs.send] external filterFnWithIndex : (t, [@bs.this] (('a, 'b, int) => bool)) => t = "filter";
 [@bs.send] external sort : t => (('a, 'a) => float) => t = "";
 [@bs.send] external order : t => unit => t = "";
 [@bs.send] external raise : t => unit => t = "";
@@ -20,6 +22,8 @@ type t;
 [@bs.send] external merge : t => t => t = "";
 [@bs.send] external data : t => array('a) => t = "";
 [@bs.send] external datum : t => array('a) => t = "";
+[@bs.send] external empty : t => unit => bool = "";
+[@bs.send] external size : t => int = "";
 
 [@bs.send] external enter : t => t = "";
 [@bs.send] external exit : t => t = "";
