@@ -1,3 +1,7 @@
+/*
+ * d3-selection
+ * https://github.com/d3/d3-selection#api-reference
+ */
 type t;
 
 [@bs.send] external select : t => string => t = "";

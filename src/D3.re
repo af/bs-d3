@@ -1,3 +1,10 @@
+/*
+ * Manually namespace sub-modules
+ * Bucklescript has its own namespacing support, but with it turned on, we were getting strange build
+ * failures on the first few builds. So we namespace manually for now.
+ *
+ * See https://blog.janestreet.com/better-namespaces-through-module-aliases/
+ */
 include D3_RootSelection;
 
 module Area = D3_Area;
