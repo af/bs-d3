@@ -37,7 +37,7 @@ module Make = (S: ScaleType) => {
 
   /* TODO: there is almost certainly a better way to implement this */
   let call: ((t, S.domainT) => S.rangeT) = [%raw (scale, x) => "{return scale(x)}"];
-  let invert: ((t, S.rangeT) => S.domainT) = [%raw (scale, x) => "{return scale.invert(x)}"];
+  [@bs.send] external invert : t => S.rangeT => S.domainT = "";
 
   [@bs.send] external domain : t => array(S.domainT) => t = "";
   [@bs.send] external range : t => array(S.rangeT) => t = "";

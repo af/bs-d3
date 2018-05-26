@@ -3,6 +3,7 @@
  * https://github.com/d3/d3-selection#api-reference
  */
 type t;
+type group;     /* TODO: this isn't usable yet, grep for "current group" in the d3 docs above */
 
 [@bs.send] external select : t => string => t = "";
 [@bs.send] external selectAll : t => string => t = "";
@@ -10,12 +11,13 @@ type t;
 [@bs.send] external insert : t => string => t = "";
 [@bs.send] external remove : t => t = "";
 [@bs.send] external attr : t => (string, 'a) => t = "";
+[@bs.send] external attrFn : t => string => (('a, int, group) => 'c) => t = "attr";
 [@bs.send] external classed : t => (string, bool) => t = "";
-[@bs.send] external classedFn : t => (string, ('a, int) => bool) => t = "classed";
+[@bs.send] external classedFn : t => (string, ('a, int, group) => bool) => t = "classed";
 
 [@bs.send] external style : t => (string, string) => t = "";
-[@bs.send] external styleFn : t => (string, ('a, int) => string) => t = "style";
-[@bs.send] external textFn : t => (('a, int) => string) => t = "text";
+[@bs.send] external styleFn : t => (string, ('a, int, group) => string) => t = "style";
+[@bs.send] external textFn : t => (('a, int, group) => string) => t = "text";
 [@bs.send] external filter : t => string => t = "";
 [@bs.send] external filterFn : (t, [@bs.this] ('a => bool)) => t = "filter";
 [@bs.send] external filterFnWithIndex : (t, [@bs.this] (('a, 'b, int) => bool)) => t = "filter";

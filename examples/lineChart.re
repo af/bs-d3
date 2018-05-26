@@ -2,8 +2,6 @@
  * via https://bl.ocks.org/d3noob/402dd382a51a4f6eea487f9a35566de0 */
 module S = D3.Selection;
 
-/* TODO: create Selection.attrFn and replace untyped callbacks here */
-
 let sampleData = [|1, 5, 6, 9, 10, 1, 3, 7, 6, 4, 5|];
 let margin = 20.;
 let width = 900.;
@@ -83,8 +81,8 @@ svg
 |. S.enter
 |. S.append("circle")
 |. S.attr("fill", "#337")
-|. S.attr("cx", (_, idx, _) => X.call(xScale, idx |> float_of_int))
-|. S.attr("cy", (value, _, _) => Y.call(yScale, value))
+|. S.attrFn("cx", (_, idx, _) => X.call(xScale, idx |> float_of_int))
+|. S.attrFn("cy", (value, _, _) => Y.call(yScale, value))
 |. S.attr("r", 3);
 
 svg
