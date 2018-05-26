@@ -59,19 +59,15 @@ let svg =
 /* Draw a line with the data */
 svg
 |. S.append("path")
+|. S.attr("class", "linePath")
 |. S.datum(sampleData)
-|. S.attr("fill", "none")
-|. S.attr("stroke-width", "3")
-|. S.attr("stroke", "#337")
-|. S.attr("class", "line")
 |. S.attr("d", valueLine);
 
 /* Draw an area fill with the data */
 svg
 |. S.append("path")
+|. S.attr("class", "lineArea")
 |. S.datum(sampleData)
-|. S.attr("fill", "#ddf")
-|. S.attr("stroke", "none")
 |. S.attr("d", area);
 
 /* Draw circles for each data point */
@@ -80,14 +76,18 @@ svg
 |. S.data(sampleData)
 |. S.enter
 |. S.append("circle")
-|. S.attr("fill", "#337")
+|. S.attr("class", "linePoint")
 |. S.attrFn("cx", (_, idx, _) => X.call(xScale, idx |> float_of_int))
 |. S.attrFn("cy", (value, _, _) => Y.call(yScale, value))
 |. S.attr("r", 3);
 
 svg
 |. S.append("g")
+|. S.attr("class", "axis xAxis")
 |. S.attr("transform", "translate(0," ++ (fmtFloat(height -. margin) ++ ")"))
 |. S.callAxis(D3.Axis.makeBottom(xScale));
 
-svg |. S.append("g") |. S.callAxis(D3.Axis.makeLeft(yScale));
+svg
+|. S.append("g")
+|. S.attr("class", "axis yAxis")
+|. S.callAxis(D3.Axis.makeLeft(yScale));
