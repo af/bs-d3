@@ -11,38 +11,32 @@ let curve = D3.Curve.catmullRom;
 /* Little util to format floats for svg/html attributes (without the trailing ".") */
 let fmtFloat = x => x |. int_of_float |. string_of_int;
 
-/* TODO: create an alias in the bindings for this common case */
-module LinearFloat = {
-  type domainT = float;
-  type rangeT = float;
-  let scale = D3.Scale.Linear;
-};
-module X = D3.Scale.Make(LinearFloat);
-module Y = D3.Scale.Make(LinearFloat);
+module X = D3.Scale.MakeLinearFloat();
+module Y = D3.Scale.MakeLinearFloat();
 
-let xScale = X.(
-  scale
+let _ = X.(
+  instance
   |. domain([|0., float_of_int(Array.length(sampleData) - 1)|])
   |. range([|0., width|])
 );
 
-let yScale = Y.(
-  scale
+let _ = Y.(
+  instance
   |. domain([|0., float_of_int(D3.Array.max_(sampleData, ()))|])
   |. range([|height, 0.|])
 );
 
 let valueLine =
   D3.Line.make()
-  |. D3.Line.x((_, idx, _) => X.call(xScale, float_of_int(idx)))
+  |. D3.Line.x((_, idx, _) => X.call(float_of_int(idx)))
   |. D3.Line.curve(curve)
-  |. D3.Line.y((value, _, _) => Y.call(yScale, value));
+  |. D3.Line.y((value, _, _) => Y.call(value));
 
 let area =
   D3.Area.make()
-  |. D3.Area.x((_, idx, _) => X.call(xScale, float_of_int(idx)))
+  |. D3.Area.x((_, idx, _) => X.call(float_of_int(idx)))
   |. D3.Area.curve(curve)
-  |. D3.Area.y1((value, _, _) => Y.call(yScale, value))
+  |. D3.Area.y1((value, _, _) => Y.call(value))
   |. D3.Area.y0((_, _, _) => height -. margin);
 
 let svg =
@@ -55,6 +49,18 @@ let svg =
        "transform",
        "translate(" ++ fmtFloat(margin) ++ "," ++ fmtFloat(margin) ++ ")"
      );
+
+/* Draw x and y axes on the svg */
+svg
+|. S.append("g")
+|. S.attr("class", "axis xAxis")
+|. S.attr("transform", "translate(0," ++ (fmtFloat(height -. margin) ++ ")"))
+|. S.callAxis(D3.Axis.makeBottom(X.instance));
+
+svg
+|. S.append("g")
+|. S.attr("class", "axis yAxis")
+|. S.callAxis(D3.Axis.makeLeft(Y.instance));
 
 /* Draw a line with the data */
 svg
@@ -77,17 +83,6 @@ svg
 |. S.enter
 |. S.append("circle")
 |. S.attr("class", "linePoint")
-|. S.attrFn("cx", (_, idx, _) => X.call(xScale, idx |> float_of_int))
-|. S.attrFn("cy", (value, _, _) => Y.call(yScale, value))
+|. S.attrFn("cx", (_, idx, _) => X.call(idx |> float_of_int))
+|. S.attrFn("cy", (value, _, _) => Y.call(value))
 |. S.attr("r", 3);
-
-svg
-|. S.append("g")
-|. S.attr("class", "axis xAxis")
-|. S.attr("transform", "translate(0," ++ (fmtFloat(height -. margin) ++ ")"))
-|. S.callAxis(D3.Axis.makeBottom(xScale));
-
-svg
-|. S.append("g")
-|. S.attr("class", "axis yAxis")
-|. S.callAxis(D3.Axis.makeLeft(yScale));

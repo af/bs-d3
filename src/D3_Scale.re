@@ -27,7 +27,8 @@ module type ScaleType = {
 
 
 module Make = (S: ScaleType) => {
-  let scale = switch (S.scale) {
+  /* Store D3's mutable scale object in the module as `instance` */
+  let instance = switch (S.scale) {
   | Linear => _makeLinear()
   | Log => _makeLog()
   | Pow => _makePow()
@@ -35,8 +36,11 @@ module Make = (S: ScaleType) => {
   | Time => _makeTime()
   };
 
-  /* TODO: there is almost certainly a better way to implement this */
-  let call: ((t, S.domainT) => S.rangeT) = [%raw (scale, x) => "{return scale(x)}"];
+  let call = (value: S.domainT): S.rangeT => {
+    /* TODO: there is almost certainly a better way to invoke the scale here */
+    let inner: (t, S.domainT) => S.rangeT = [%raw (scale, x) => "{return scale(x)}"];
+    inner(instance, value);
+  };
   [@bs.send] external invert : t => S.rangeT => S.domainT = "";
 
   [@bs.send] external domain : t => array(S.domainT) => t = "";
@@ -44,4 +48,14 @@ module Make = (S: ScaleType) => {
   [@bs.send] external rangeRound : t => array(S.rangeT) => t = "";
   [@bs.send] external clamp : t => bool => t = "";
   [@bs.send] external ticks : t => int => array(S.domainT) = "";
+};
+
+
+/* alias for the most common type of scale */
+module MakeLinearFloat = () => {
+  include Make({
+    type domainT = float;
+    type rangeT = float;
+    let scale = Linear;
+  });
 };
