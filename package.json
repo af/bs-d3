@@ -3,14 +3,15 @@
   "description": "Experimental d3 5.x bindings for BuckleScript",
   "version": "0.1.0",
   "scripts": {
-    "bundle-analyze": "ANALYZE_BUNDLE=1 npm run bundle-examples",
+    "bundle-analyze": "ANALYZE_BUNDLE=1 npm run build",
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "pretest": "bsb -make-world",
     "test": "jest --watchAll",
     "test-ci": "npm run pretest && jest",
-    "webpack": "webpack -w --mode development --context examples --config examples/webpack.config.js"
+    "webpack": "webpack -w --mode development --context examples --config examples/webpack.config.js",
+    "build": "webpack --mode production --context examples --config examples/webpack.config.js"
   },
   "homepage": "https://github.com/af/bs-d3",
   "repository": "https://github.com/af/bs-d3",

@@ -12,7 +12,7 @@ const entry = exampleSources.reduce((acc, src) => {
     const fullPath = path.join(sourceDir, src)
     return {...acc, [entryName]: fullPath}
 }, {})
-console.log(entry)
+// console.log(entry)
 
 module.exports = {
     entry,
@@ -23,6 +23,4 @@ module.exports = {
     },
 
     plugins: ANALYZE_BUNDLE ? [new BundleAnalyzerPlugin()] : [],
-
-    devtool: 'cheap-eval-source-map'
 }
