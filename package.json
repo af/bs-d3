@@ -27,15 +27,15 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "0.4.2",
-    "bs-platform": "3.1.4",
-    "jest": "22.4.3",
-    "jsdom": "11.10.0",
-    "webpack": "4.9.1",
-    "webpack-bundle-analyzer": "2.11.1",
-    "webpack-cli": "2.1.4"
+    "bs-platform": "4.0.0",
+    "jest": "23.4.1",
+    "jsdom": "11.11.0",
+    "webpack": "4.16.0",
+    "webpack-bundle-analyzer": "2.13.1",
+    "webpack-cli": "3.0.8"
   },
   "dependencies": {
-    "d3": "5.4.0"
+    "d3": "5.5.0"
   },
   "jest": {
     "testRegex": "/js/__tests__/.*_test\\.js$"

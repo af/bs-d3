@@ -7,15 +7,19 @@ WIP [d3](https://github.com/d3/d3) 5.x bindings for [Bucklescript](https://githu
 Extremely incomplete and experimental; contributions welcome!
 
 
-## Build
-```
-npm run build
-```
-
-## Build + Watch
+## Setting up a dev environment
 
 ```
-npm run start
+# Install dependencies
+yarn
+
+# Start bucklescript in watch mode
+yarn start
+
+# In a separate terminal window, run webpack
+yarn webpack
+
+# Then open `./examples/index.html` and you should the line chart from `./examples/lineChart.re`
 ```
 
 ## Current status
