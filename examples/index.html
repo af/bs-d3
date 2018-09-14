@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>test</title>
     <style>
+        /* general styles */
+        .axis line, .axis path {
+            stroke: #ccc;
+        }
+        .axis text {
+            fill: #888;
+            font-weight: normal;
+        }
+
         /* line chart styles */
         .linePath {
             fill: none;
@@ -18,12 +27,15 @@
         .linePoint {
             fill: #337;
         }
-        .axis line, .axis path {
-            stroke: #ccc;
+
+        /* bubble styles */
+        .bubble {
+            fill: rgba(0,0,190,0.3);
+            opacity: 0.8;
+            transition: opacity 0.2s;
         }
-        .axis text {
-            fill: #888;
-            font-weight: normal;
+        .bubble:hover {
+            opacity: 1;
         }
     </style>
 </head>
