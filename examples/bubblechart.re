@@ -1,6 +1,6 @@
 module S = D3.Selection;
 
-let sampleData = [|1, 5, 6, 9, 20, 1, 3, 12, 2|];
+let sampleData = Players.data;
 let margin = 30.;
 let width = 900.;
 let height = 500.;
@@ -16,9 +16,10 @@ let _ = X.(
   |. range([|0., width|])
 );
 
+let maxGoals = D3.Array.max_(sampleData, ~accessor=((player: Players.t) => player.g), ());
 let _ = Y.(
   instance
-  |. domain([|0., float_of_int(D3.Array.max_(sampleData, ()))|])
+  |. domain([|0., float_of_int(maxGoals)|])
   |. range([|height, 0.|])
 );
 
@@ -36,7 +37,7 @@ let svg =
 svg
 |. S.append("g")
 |. S.attr("class", "axis xAxis")
-|. S.attr("transform", "translate(0," ++ (fmtFloat(height -. margin) ++ ")"))
+|. S.attr("transform", "translate(0," ++ (fmtFloat(height) ++ ")"))
 |. S.callAxis(D3.Axis.makeBottom(X.instance));
 
 svg
@@ -44,12 +45,14 @@ svg
 |. S.attr("class", "axis yAxis")
 |. S.callAxis(D3.Axis.makeLeft(Y.instance));
 
+/* Add bubbles to the chart */
 svg
 |. S.selectAll(".node")
 |. S.data(sampleData)
 |. S.enter
 |. S.append("circle")
-|. S.attr("class", "bubble")
+|. S.attrFn("class", (d: Players.t, _, _) => "bubble " ++ d.pos)
+|. S.attr("title", (d: Players.t, _, _) => d.name)
 |. S.attr("cx", (_, idx, _) => X.call(idx))
-|. S.attr("cy", height /. 2.)
-|. S.attr("r", (d, _, _) => d * 10);
+|. S.attr("cy", (d: Players.t, _, _) => Y.call(float_of_int(d.g)))
+|. S.attr("r", (d: Players.t, _, _) => d.salary *. 3.);

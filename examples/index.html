@@ -29,9 +29,12 @@
         }
 
         /* bubble styles */
+        .bubble.C { --hue: 180; }
+        .bubble.RW { --hue: 140; }
+        .bubble.LW { --hue: 220; }
         .bubble {
-            fill: rgba(0,0,190,0.3);
-            opacity: 0.8;
+            fill: hsl(var(--hue), 60%, 60%);
+            opacity: 0.6;
             transition: opacity 0.2s;
         }
         .bubble:hover {
