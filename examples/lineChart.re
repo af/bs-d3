@@ -40,7 +40,7 @@ let area =
   |. D3.Area.y0((_, _, _) => height -. margin);
 
 let svg =
-  D3.select("body")
+  D3.select(".linechart")
   |. S.append("svg")
   |. S.attr("width", width +. 2. *. margin)
   |. S.attr("height", height +. 2. *. margin)

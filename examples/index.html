@@ -3,9 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>test</title>
+    <title>bs-d3 examples</title>
     <style>
-        /* general styles */
+        /* general ui styles */
+        body {
+            color: #446;
+            font-family: system-ui;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        summary {
+            padding: 10px 20px;
+            background: linear-gradient(#eeeefa, #dde);
+            cursor: pointer;
+        }
+        .chartbox {
+            padding: 20px;
+        }
+
+        /* general viz styles */
         text {
             font-family: system-ui;
         }
@@ -46,6 +64,18 @@
     </style>
 </head>
 <body>
-    <script src="./dist/bubbleChart.js"></script>
+    <h1>bs-d3 examples</h1>
+    <details open>
+        <summary>Bubble chart</summary>
+        <div class="chartbox bubblechart"></div>
+    </details>
+    <script src="./dist/bubblechart.js"></script>
+
+    <details>
+        <summary>Line chart</summary>
+        <div class="chartbox linechart"></div>
+    </details>
+
+    <script src="./dist/linechart.js"></script>
 </body>
 </html>

@@ -26,7 +26,7 @@ let _ = Y.(
 );
 
 let svg =
-  D3.select("body")
+  D3.select(".bubblechart")
   |. S.append("svg")
   |. S.attr("width", width +. (2. *. margin))
   |. S.attr("height", height +. (2. *. margin))
