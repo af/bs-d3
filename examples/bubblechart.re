@@ -10,9 +10,11 @@ let fmtFloat = x => x |. int_of_float |. string_of_int;
 module X = D3.Scale.MakeLinearFloat();
 module Y = D3.Scale.MakeLinearFloat();
 
+let maxPoints = D3.Array.max_(sampleData, ~accessor=((player: Players.t) => player.total), ());
+let minPoints = D3.Array.min_(sampleData, ~accessor=((player: Players.t) => player.total), ());
 let _ = X.(
   instance
-  |. domain([|0., float_of_int(Array.length(sampleData) - 1)|])
+  |. domain([|float_of_int(minPoints), float_of_int(maxPoints)|])
   |. range([|0., width|])
 );
 
@@ -53,6 +55,6 @@ svg
 |. S.append("circle")
 |. S.attrFn("class", (d: Players.t, _, _) => "bubble " ++ d.pos)
 |. S.attr("title", (d: Players.t, _, _) => d.name)
-|. S.attr("cx", (_, idx, _) => X.call(idx))
+|. S.attr("cx", (d: Players.t, _, _) => X.call(float_of_int(d.total)))
 |. S.attr("cy", (d: Players.t, _, _) => Y.call(float_of_int(d.g)))
-|. S.attr("r", (d: Players.t, _, _) => d.salary *. 3.);
+|. S.attr("r", (d: Players.t, _, _) => sqrt(d.salary) *. 8.);
