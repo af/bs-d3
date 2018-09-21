@@ -14,3 +14,6 @@ module Curve = D3_Curve;
 module Line = D3_Line;
 module Scale = D3_Scale;
 module Selection = D3_Selection;
+
+/* Assorted utils that come from this bindings library */
+module Helpers = D3_Helpers;
