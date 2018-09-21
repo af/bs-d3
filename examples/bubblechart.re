@@ -47,14 +47,41 @@ svg
 |. S.attr("class", "axis yAxis")
 |. S.callAxis(D3.Axis.makeLeft(Y.instance));
 
-/* Add bubbles to the chart */
-svg
-|. S.selectAll(".node")
+/* Add <g> wrappers for each bubble to the chart */
+let cell = svg
+|. S.selectAll(".bubbleCell")
 |. S.data(sampleData)
 |. S.enter
+|. S.append("g")
+|. S.classed("bubbleCell", true)
+|. S.attrFn("transform", (d: Players.t, _, _) => {
+    let x = X.call(float_of_int(d.total));
+    let y = Y.call(float_of_int(d.g));
+    "translate(" ++ fmtFloat(x) ++ "," ++ fmtFloat(y) ++ ")";
+});
+
+/* add the actual bubble */
+cell
 |. S.append("circle")
 |. S.attrFn("class", (d: Players.t, _, _) => "bubble " ++ d.pos)
-|. S.attr("title", (d: Players.t, _, _) => d.name)
-|. S.attr("cx", (d: Players.t, _, _) => X.call(float_of_int(d.total)))
-|. S.attr("cy", (d: Players.t, _, _) => Y.call(float_of_int(d.g)))
-|. S.attr("r", (d: Players.t, _, _) => sqrt(d.salary) *. 8.);
+|. S.attrFn("title", (d: Players.t, _, _) => d.name)
+|. S.attr("cx", 0)
+|. S.attr("cy", 0)
+|. S.attrFn("r", (d: Players.t, _, _) => sqrt(d.salary) *. 8.);
+
+/* each "cell" has a <g> that contains text elements: */
+let textBox = cell
+|. S.append("g")
+|. S.classed("textBox", true)
+|. S.attr("transform", "translate(20, 0)");
+
+textBox
+|. S.append("text")
+|. S.classed("name", true)
+|. S.textFn((d: Players.t, _, _) => d.name);
+
+textBox
+|. S.append("text")
+|. S.classed("position", true)
+|. S.attr("y", 12)
+|. S.textFn((d: Players.t, _, _) => d.pos);

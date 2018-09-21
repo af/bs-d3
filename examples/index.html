@@ -6,7 +6,7 @@
     <title>bs-d3 examples</title>
     <style>
         /* general ui styles */
-        body {
+        body, text {
             color: #446;
             font-family: system-ui;
             margin: 0;
@@ -50,6 +50,14 @@
         }
 
         /* bubble styles */
+        .bubbleCell .textBox {
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        .bubbleCell:hover .textBox {
+            opacity: 1;
+        }
         .bubble.C { --hue: 180; }
         .bubble.RW { --hue: 140; }
         .bubble.LW { --hue: 220; }
@@ -58,6 +66,8 @@
             opacity: 0.6;
             transition: opacity 0.2s;
         }
+        .name { font-size: 13px; }
+        .position { font-size: 10px; }
         .bubble:hover {
             opacity: 1;
         }
