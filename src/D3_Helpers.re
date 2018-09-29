@@ -1,4 +1,4 @@
-module S = D3.Selection;
+module S = D3_Selection;
 
 type margin = {
   t: float,
@@ -26,7 +26,7 @@ let fmtFloat = x => {
 let makeContainer = (rootSelector, chartDims) => {
   let {margin} = chartDims;
 
-  D3.select(rootSelector)
+  D3_RootSelection.select(rootSelector)
   |. S.append("svg")
   |. S.attr("width", chartDims.width +. margin.l +. margin.r)
   |. S.attr("height", chartDims.height +. margin.t +. margin.b)
