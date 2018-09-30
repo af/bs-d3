@@ -17,32 +17,25 @@ let height = 500.;
 let margin = D3.Helpers.{t: 20., r: 20., b: 20., l: 30.};
 let radius = min(width, height) /. 2.;
 
-/*let color = D3.Scale.makeSinebow()*/
-/*|. D3.Scale.domain([|0., float_of_int(Array.length(data))|]);*/
-module Color = D3.Scale.MakeContinuous({
-  type domainT = int;
-  type rangeT = string;
-  let scale = D3.Scale.Linear;
-});
-let _ = Color.(
-  instance
-  |. domain([|0, Array.length(data) - 1|])
-  |. range([|"green", "blue"|])
-);
+let pie = D3.Pie.make()
+|. D3.Pie.sort(None)
+|. D3.Pie.value(((_, playerCount)) => float_of_int(playerCount));
+
+let color = D3.Scale.makeSinebow()
+|. D3.Scale.sequentialDomain([|0., data |. Array.length |. float_of_int|]);
 
 let svg = D3.Helpers.makeContainer(".piechart", {width, height, margin})
 |. S.attr("transform", "translate(" ++ fmtFloat(width /. 2.) ++ "," ++ fmtFloat(height /. 2.) ++ ")");
-
-let pie = D3.Pie.make()
-|. D3.Pie.value(((_, playerCount)) => float_of_int(playerCount));
 
 let path = D3.Arc.(make()
 |. innerRadius(0.)
 |. outerRadius(radius)
 );
 
-/*Js.log(path)*/
-/*Js.log(pie(data))*/
+let label = D3.Arc.(make()
+|. innerRadius(radius -. 30.)
+|. outerRadius(radius -. 30.)
+);
 
 let group = svg
 |. S.selectAll(".piearc")
@@ -54,4 +47,19 @@ let group = svg
 group
 |. S.append("path")
 |. S.attr("d", path)
-|. S.attrFn("fill", (_, idx, _) => Color.call(idx));
+|. S.attrFn("fill", (_, idx, _) => {
+  color |. D3.Scale.sequentialCall(float_of_int(idx))
+});
+
+group
+|. S.append("text")
+|. S.classed("teamText", true)
+|. S.attr("dx", -15)
+|. S.attrFn("transform", (d, _, _) => {
+  let (x, y) = D3.Arc.centroid(label, d);
+  "translate(" ++ fmtFloat(x) ++ "," ++ fmtFloat(y) ++ ")";
+})
+|. S.textFn((d: D3.Pie.wrapped(teamTuple), _, _) => {
+  let (teamName, playerCount) = d##data;
+  teamName ++ " (" ++ string_of_int(playerCount) ++ ")";
+});

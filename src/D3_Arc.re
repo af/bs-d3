@@ -12,3 +12,4 @@ type t;
 [@bs.send] external startAngle : t => float => t = "";
 [@bs.send] external endAngle : t => float => t = "";
 [@bs.send] external padAngle : t => float => t = "";
+[@bs.send] external centroid : t => 'a => (float, float) = "";

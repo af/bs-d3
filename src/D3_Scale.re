@@ -60,11 +60,15 @@ module MakeLinearFloat = () => {
   });
 };
 
-
-/* TODO: would be nice to paramaterize t instead of having a completely separate type here */
+/* Rough WIP for sequential scales */
+/* TODO: would be nice to paramaterize D3.Scale.t instead of having a completely separate type here */
 type sequential;
 [@bs.module "d3-scale"] external _makeSequential : 'a => sequential = "scaleSequential";
-[@bs.module "d3-scale-chromatic"] external _sineBow : unit => 'a = "interpolateSinebow";
-[@bs.send] external domain : sequential => array('a) => sequential = "";
-let call: (sequential => float => float) = [%raw (scale, x) => "{return scale(x)}"];
+[@bs.module "d3-scale-chromatic"] external _sineBow : 'a = "interpolateSinebow";
+[@bs.module "d3-scale-chromatic"] external _rainbow : 'a = "interpolateRainbow";
+[@bs.module "d3-scale-chromatic"] external _brBG : 'a = "interpolateBrBG";
+
+[@bs.send] external sequentialDomain : sequential => array('a) => sequential = "domain";
+let sequentialCall: (sequential => float => float) = [%raw (scale, x) => "{return scale(x)}"];
 let makeSinebow = () => _makeSequential(_sineBow);
+let makeRainbow = () => _makeSequential(_rainbow);
