@@ -74,6 +74,10 @@
 
         /* bar styles */
         .bar { fill: #88a; }
+
+        /* pie styles */
+        .piearc { fill: #88a; transition: all 0.2s; }
+        .piearc:hover { fill: #779; }
     </style>
 </head>
 <body>
@@ -84,11 +88,17 @@
     </details>
     <script src="./dist/bubblechart.js"></script>
 
-    <details open>
+    <details>
         <summary>Bar chart</summary>
         <div class="chartbox barchart"></div>
     </details>
     <script src="./dist/barchart.js"></script>
+
+    <details open>
+        <summary>Pie chart</summary>
+        <div class="chartbox piechart"></div>
+    </details>
+    <script src="./dist/piechart.js"></script>
 
     <details>
         <summary>Line chart</summary>

@@ -5,7 +5,6 @@ let data = Players.data;
 let width = 900.;
 let height = 500.;
 let margin = D3.Helpers.{t: 20., r: 20., b: 20., l: 30.};
-let curve = D3.Curve.catmullRom;
 
 
 module X = D3.Scale.MakeLinearFloat();
