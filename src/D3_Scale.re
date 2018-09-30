@@ -26,7 +26,7 @@ module type ScaleType = {
 [@bs.module "d3-scale"] external _makeTime : unit => t = "scaleTime";
 
 
-module Make = (S: ScaleType) => {
+module MakeContinuous = (S: ScaleType) => {
   /* Store D3's mutable scale object in the module as `instance` */
   let instance = switch (S.scale) {
   | Linear => _makeLinear()
@@ -53,9 +53,18 @@ module Make = (S: ScaleType) => {
 
 /* alias for the most common type of scale */
 module MakeLinearFloat = () => {
-  include Make({
+  include MakeContinuous({
     type domainT = float;
     type rangeT = float;
     let scale = Linear;
   });
 };
+
+
+/* TODO: would be nice to paramaterize t instead of having a completely separate type here */
+type sequential;
+[@bs.module "d3-scale"] external _makeSequential : 'a => sequential = "scaleSequential";
+[@bs.module "d3-scale-chromatic"] external _sineBow : unit => 'a = "interpolateSinebow";
+[@bs.send] external domain : sequential => array('a) => sequential = "";
+let call: (sequential => float => float) = [%raw (scale, x) => "{return scale(x)}"];
+let makeSinebow = () => _makeSequential(_sineBow);

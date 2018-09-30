@@ -17,6 +17,18 @@ let height = 500.;
 let margin = D3.Helpers.{t: 20., r: 20., b: 20., l: 30.};
 let radius = min(width, height) /. 2.;
 
+/*let color = D3.Scale.makeSinebow()*/
+/*|. D3.Scale.domain([|0., float_of_int(Array.length(data))|]);*/
+module Color = D3.Scale.MakeContinuous({
+  type domainT = int;
+  type rangeT = string;
+  let scale = D3.Scale.Linear;
+});
+let _ = Color.(
+  instance
+  |. domain([|0, Array.length(data) - 1|])
+  |. range([|"green", "blue"|])
+);
 
 let svg = D3.Helpers.makeContainer(".piechart", {width, height, margin})
 |. S.attr("transform", "translate(" ++ fmtFloat(width /. 2.) ++ "," ++ fmtFloat(height /. 2.) ++ ")");
@@ -42,3 +54,4 @@ let group = svg
 group
 |. S.append("path")
 |. S.attr("d", path)
+|. S.attrFn("fill", (_, idx, _) => Color.call(idx));
