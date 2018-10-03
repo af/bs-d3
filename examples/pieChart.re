@@ -15,14 +15,16 @@ let data = (teamMap |. M.toArray);
 let width = 900.;
 let height = 500.;
 let margin = D3.Helpers.{t: 20., r: 20., b: 20., l: 30.};
-let radius = min(width, height) /. 2.;
+let radius = min(width, height) *. 0.4;
 
 let pie = D3.Pie.make()
 |. D3.Pie.sort(None)
 |. D3.Pie.value(((_, playerCount)) => float_of_int(playerCount));
 
-let color = D3.Scale.makeSinebow()
-|. D3.Scale.sequentialDomain([|0., data |. Array.length |. float_of_int|]);
+let color = D3.Scale.(
+  makeSequential(interpolateBrBG)
+  |. sequentialDomain([|0., data |. Array.length |. float_of_int|])
+);
 
 let svg = D3.Helpers.makeContainer(".piechart", {width, height, margin})
 |. S.attr("transform", "translate(" ++ fmtFloat(width /. 2.) ++ "," ++ fmtFloat(height /. 2.) ++ ")");
@@ -33,8 +35,8 @@ let path = D3.Arc.(make()
 );
 
 let label = D3.Arc.(make()
-|. innerRadius(radius -. 30.)
-|. outerRadius(radius -. 30.)
+|. innerRadius(radius +. 25.)
+|. outerRadius(radius +. 25.)
 );
 
 let group = svg
