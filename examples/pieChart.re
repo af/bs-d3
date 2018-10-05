@@ -22,7 +22,7 @@ let pie = D3.Pie.make()
 |. D3.Pie.value(((_, playerCount)) => float_of_int(playerCount));
 
 let color = D3.Scale.(
-  makeSequential(interpolateBrBG)
+  makeSequential(D3.ScaleChromatic.interpolateBrBG)
   |. sequentialDomain([|0., data |. Array.length |. float_of_int|])
 );
 

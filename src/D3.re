@@ -15,6 +15,7 @@ module Curve = D3_Curve;
 module Line = D3_Line;
 module Pie = D3_Pie;
 module Scale = D3_Scale;
+module ScaleChromatic = D3_ScaleChromatic;
 module Selection = D3_Selection;
 
 /* Assorted utils that come from this bindings library */
