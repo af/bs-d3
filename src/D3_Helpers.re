@@ -15,9 +15,9 @@ type dimensions = {
 
 
 /* When formatting floats for html/svg attributes, ensure whole numbers have
- * a trailing "0". eg "5.0" instead of the "5." we get from string_of_float() */
+ * a trailing "0". eg "5.0" instead of the "5." we get from Js.Float.toString() */
 let fmtFloat = x => {
-  let str = string_of_float(x);
+  let str = Js.Float.toString(x);
   let lastChar = String.get(str, String.length(str) - 1);
   (lastChar == '.') ? (str ++ "0") : str;
 };

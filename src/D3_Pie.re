@@ -16,8 +16,8 @@ type inner('a) = array('a) => array(wrapped('a));
 
 [@bs.module "d3-shape"] external make : unit => inner('a) = "pie";
 
-[@bs.send] external value : inner('a) => ('a => float) => inner('a) = "";
-[@bs.send] external sort : inner('a) => option('a => 'a => int) => inner('a) = "";
+[@bs.send] external value : inner('a) => ('a => float) => inner('a) = "value";
+[@bs.send] external sort : inner('a) => option('a => 'a => int) => inner('a) = "sort";
 
 /* TODO: make this work (bucklescript seems to have trouble allowing a higher-order fn) */
 /*[@bs.module "d3-shape"] external make : unit => array('a) => array(wrapped(')a)) = "pie";*/

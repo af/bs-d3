@@ -11,7 +11,7 @@
     "test": "jest --watchAll",
     "test-ci": "npm run pretest && jest",
     "webpack": "webpack -w --mode development --context examples --config examples/webpack.config.js",
-    "build": "webpack --mode production --context examples --config examples/webpack.config.js"
+    "build:prod": "webpack --mode production --context examples --config examples/webpack.config.js"
   },
   "homepage": "https://github.com/af/bs-d3",
   "repository": "https://github.com/af/bs-d3",
@@ -26,8 +26,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@glennsl/bs-jest": "0.4.3",
-    "bs-platform": "4.0.5",
+    "@glennsl/bs-jest": "0.4.9",
+    "bs-platform": "7.1.0",
     "jest": "23.6.0",
     "jsdom": "12.0.0",
     "webpack": "4.19.0",
@@ -35,7 +35,7 @@
     "webpack-cli": "3.1.0"
   },
   "dependencies": {
-    "d3": "5.7.0"
+    "d3": "5.15.0"
   },
   "jest": {
     "testRegex": "/js/__tests__/.*_test\\.js$"
